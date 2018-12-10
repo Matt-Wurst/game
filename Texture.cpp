@@ -48,7 +48,7 @@ bool Texture::loadFromFile(std::string file, SDL_Renderer * renderer)
 
 void Texture::render(int x, int y, SDL_Renderer * renderer, double angle, SDL_Point * center, SDL_RendererFlip flip)
 {
-	SDL_Rect renderQuad = { x, y, myWidth, myHeight };
+	SDL_Rect renderQuad = { x - myWidth/2, y - myHeight / 2, myWidth, myHeight };
 	SDL_RenderCopyEx(renderer, myTexture, NULL, &renderQuad, angle, center, flip);
 }
 

@@ -1,6 +1,6 @@
 #include "Game.h"
 
-#include <cstdlib>
+//#include <cstdlib>
 
 
 
@@ -15,6 +15,6 @@ int main(int argc, char* args[])
 	Game * game = new Game(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE);
 	game->run();
 
-	system("PAUSE");
+	//system("PAUSE");
 	return 0;
 }
