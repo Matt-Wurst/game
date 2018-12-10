@@ -16,6 +16,7 @@ public:
 	int run();
 	void manageEvent(SDL_Event e);
 	void render();
+	void logic();
 
 private:
 	bool init(int width, int height, std::string title);

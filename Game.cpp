@@ -165,6 +165,7 @@ int Game::run()
 		{
 			nextTickTime += FRAME_TICKS;
 			render();
+			logic();
 		}
 
 	}
@@ -190,4 +191,9 @@ void Game::render()
 
 	//Draw
 	SDL_RenderPresent(myRenderer);
+}
+
+
+void Game::logic()
+{
 }
