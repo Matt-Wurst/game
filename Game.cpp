@@ -3,6 +3,9 @@
 #include <stdio.h>
 
 
+const int FPS = 60;
+const int FRAME_TICKS = 1000 / FPS;
+
 
 Game::Game(int width, int height, std::string title)
 {
@@ -61,7 +64,7 @@ bool Game::init(int width, int height, std::string title)
 		}
 		else
 		{
-			myRenderer = SDL_CreateRenderer(myWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+			myRenderer = SDL_CreateRenderer(myWindow, -1, SDL_RENDERER_ACCELERATED);
 			if (myRenderer == NULL)
 			{
 				printf("Renderer could not be created! SDL Error: %s\n", SDL_GetError());
@@ -139,7 +142,8 @@ int Game::run()
 	//Event handler
 	SDL_Event e;
 
-	double angle = 0;
+	int startTime = SDL_GetTicks();
+	int nextTickTime = startTime;
 
 	//While application is running
 	while (!quit)
@@ -154,11 +158,18 @@ int Game::run()
 			}
 		}
 
-		angle += 1;
+		if (nextTickTime <= SDL_GetTicks()) 
+		{
+			nextTickTime += FRAME_TICKS;
 
-		SDL_RenderClear(myRenderer);
-		myTexture->render(100, 200, myRenderer, angle);
-		SDL_RenderPresent(myRenderer);
+			static int angle = 0;
+			angle++;
+
+			SDL_RenderClear(myRenderer);
+			myTexture->render(100, 200, myRenderer, angle);
+			SDL_RenderPresent(myRenderer);
+		}
+
 	}
 
 	return 0;
