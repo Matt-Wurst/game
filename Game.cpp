@@ -176,6 +176,24 @@ int Game::run()
 
 void Game::manageEvent(SDL_Event e)
 {
+	if (e.type == SDL_KEYDOWN) 
+	{
+		switch (e.key.keysym.sym)
+		{
+			case SDLK_UP: 
+				printf("Up arrow key pressed\n");
+				break;
+			case SDLK_DOWN:
+				printf("Down arrow key pressed\n");
+				break;
+			case SDLK_LEFT:
+				printf("Left arrow key pressed\n");
+				break;
+			case SDLK_RIGHT:
+				printf("Right arrow key pressed\n");
+				break;
+		}
+	}
 }
 
 
