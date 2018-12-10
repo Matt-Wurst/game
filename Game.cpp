@@ -151,10 +151,13 @@ int Game::run()
 		//Handle events on queue
 		while (SDL_PollEvent(&e) != 0)
 		{
-			//User requests quit
 			if (e.type == SDL_QUIT)
 			{
 				quit = true;
+			}
+			else
+			{
+				manageEvent(e);
 			}
 		}
 
@@ -167,6 +170,11 @@ int Game::run()
 	}
 
 	return 0;
+}
+
+
+void Game::manageEvent(SDL_Event e)
+{
 }
 
 

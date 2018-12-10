@@ -14,6 +14,7 @@ public:
 	~Game();
 
 	int run();
+	void manageEvent(SDL_Event e);
 	void render();
 
 private:
