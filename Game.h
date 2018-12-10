@@ -14,6 +14,7 @@ public:
 	~Game();
 
 	int run();
+	void render();
 
 private:
 	bool init(int width, int height, std::string title);

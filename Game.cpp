@@ -161,16 +161,25 @@ int Game::run()
 		if (nextTickTime <= SDL_GetTicks()) 
 		{
 			nextTickTime += FRAME_TICKS;
-
-			static int angle = 0;
-			angle++;
-
-			SDL_RenderClear(myRenderer);
-			myTexture->render(100, 200, myRenderer, angle);
-			SDL_RenderPresent(myRenderer);
+			render();
 		}
 
 	}
 
 	return 0;
+}
+
+
+void Game::render()
+{
+	//Clear
+	SDL_RenderClear(myRenderer);
+
+	//everything
+	static int angle = 0;
+	angle++;
+	myTexture->render(100, 200, myRenderer, angle);
+
+	//Draw
+	SDL_RenderPresent(myRenderer);
 }
