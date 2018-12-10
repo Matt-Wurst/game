@@ -139,6 +139,8 @@ int Game::run()
 	//Event handler
 	SDL_Event e;
 
+	double angle = 0;
+
 	//While application is running
 	while (!quit)
 	{
@@ -152,8 +154,10 @@ int Game::run()
 			}
 		}
 
+		angle += 1;
+
 		SDL_RenderClear(myRenderer);
-		myTexture->render(100, 200, myRenderer, 0);
+		myTexture->render(100, 200, myRenderer, angle);
 		SDL_RenderPresent(myRenderer);
 	}
 
