@@ -4,6 +4,7 @@
 #include <SDL_image.h>
 #include <string>
 
+#include "Texture.h"
 
 
 class Game
@@ -19,8 +20,11 @@ private:
 	bool loadMedia();
 	SDL_Surface* loadSurface(std::string path);
 
-	SDL_Window* gWindow = NULL;
-	SDL_Surface* gScreenSurface = NULL;
-	SDL_Surface* gPNGSurface = NULL;
+	SDL_Window * myWindow = NULL;
+	SDL_Renderer * myRenderer = NULL;
+	SDL_Surface * myScreenSurface = NULL;
+
+	//testing thingies
+	Texture * myTexture = NULL;
 };
 
