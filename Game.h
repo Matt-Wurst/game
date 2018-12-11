@@ -5,6 +5,7 @@
 #include <string>
 
 #include "Texture.h"
+#include "TextureLoader.h"
 
 
 class Game
@@ -26,6 +27,7 @@ private:
 	SDL_Window * myWindow = NULL;
 	SDL_Renderer * myRenderer = NULL;
 	SDL_Surface * myScreenSurface = NULL;
+	TextureLoader * myTextureLoader;
 
 	//testing thingies
 	Texture * myTexture = NULL;

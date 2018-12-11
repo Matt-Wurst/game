@@ -74,6 +74,7 @@ bool Game::init(int width, int height, std::string title)
 			{
 				SDL_SetRenderDrawColor(myRenderer, 0, 0, 0, 255);
 
+				myTextureLoader = new TextureLoader(myRenderer);
 
 				//Initialize PNG loading
 				int imgFlags = IMG_INIT_PNG;
@@ -98,8 +99,9 @@ bool Game::loadMedia()
 {
 	bool success = true;
 
-	myTexture = new Texture();
-	success = myTexture->loadFromFile("res/error.png", myRenderer);
+	//myTexture = new Texture();
+	//success = myTexture->loadFromFile("res/error.png", myRenderer);
+	myTexture = myTextureLoader->load("res/error.png");
 
 	return success;
 }

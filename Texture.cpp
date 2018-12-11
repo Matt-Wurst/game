@@ -22,14 +22,24 @@ bool Texture::loadFromFile(std::string file, SDL_Renderer * renderer)
 	SDL_Texture * newTexture = NULL;
 	SDL_Surface* loadedSurface = IMG_Load(file.c_str()); 
 	
-	newTexture = SDL_CreateTextureFromSurface(renderer, loadedSurface);
 	if (loadedSurface == NULL)
 	{
 		printf("Unable to load image %s! SDL_image Error: %s\n", file.c_str(), IMG_GetError());
-		Texture::loadFromFile("res/error.png", renderer);
+		SDL_Surface* loadedSurface = IMG_Load("res/error.png");
+		newTexture = SDL_CreateTextureFromSurface(renderer, loadedSurface);
+		if (loadedSurface == NULL)
+		{
+			printf("Failed to load error image!");
+		}
+		else
+		{
+
+		}
+		return false;
 	}
 	else
 	{
+		newTexture = SDL_CreateTextureFromSurface(renderer, loadedSurface);
 		if (newTexture == NULL)
 		{
 			printf("Unable to create texture from %s! SDL Error: %s\n", file.c_str(), SDL_GetError());
@@ -38,9 +48,9 @@ bool Texture::loadFromFile(std::string file, SDL_Renderer * renderer)
 		{
 			myWidth = loadedSurface->w;
 			myHeight = loadedSurface->h;
+			myTexture = newTexture;
 		}
 		SDL_FreeSurface(loadedSurface);
-		myTexture = newTexture;
 	}
 	return myTexture != NULL;
 }
