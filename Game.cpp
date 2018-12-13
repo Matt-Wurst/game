@@ -211,12 +211,26 @@ void Game::render()
 	//Clear
 	SDL_RenderClear(myRenderer);
 
+	int mouseX;
+	int mouseY;
+
+	SDL_GetMouseState(&mouseX, &mouseY);
+
+	mouseX -= myWidth / 2;
+	mouseY -= myHeight / 2;
+
+	int camOffsetX = myPlayer.getPosX() - myWidth / 2;
+	int camOffsetY = myPlayer.getPosY() - myHeight / 2;
+
+	camOffsetX += mouseX / 5;
+	camOffsetY += mouseY / 5;
+
 	//everything
-	myLevelMap.renderFloor(-16, -16);
+	myLevelMap.renderFloor(camOffsetX, camOffsetY);
 
-	myPlayer.render(-16, -16);
+	myPlayer.render(camOffsetX, camOffsetY);
 
-	myLevelMap.renderCeiling(-16, -16);
+	myLevelMap.renderCeiling(camOffsetX, camOffsetY);
 
 	//Draw
 	SDL_RenderPresent(myRenderer);
@@ -226,7 +240,7 @@ void Game::render()
 void Game::logic()
 {
 	const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
-	int v = 120;
+	int v = 200;
 	int vx = 0;
 	int vy = 0;
 	if (currentKeyStates[SDL_SCANCODE_W]) vy -= v;
