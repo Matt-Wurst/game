@@ -6,6 +6,7 @@
 
 #include "Texture.h"
 #include "TextureLoader.h"
+#include "TextureSheet.h"
 
 
 class Game
@@ -24,6 +25,8 @@ private:
 	bool loadMedia();
 	SDL_Surface* loadSurface(std::string path);
 
+	int myWidth;
+	int myHeight;
 	SDL_Window * myWindow = NULL;
 	SDL_Renderer * myRenderer = NULL;
 	SDL_Surface * myScreenSurface = NULL;
@@ -31,5 +34,6 @@ private:
 
 	//testing thingies
 	Texture * myTexture = NULL;
+	TextureSheet * myTextureSheet;
 };
 

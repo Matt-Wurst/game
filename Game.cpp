@@ -9,6 +9,8 @@ const int FRAME_TICKS = 1000 / FPS;
 
 Game::Game(int width, int height, std::string title)
 {
+	myWidth = width;
+	myHeight = height;
 	//Start up SDL and create window
 	if (!init(width, height, title))
 	{
@@ -29,6 +31,9 @@ Game::~Game()
 {
 	delete myTexture;
 	myTexture = NULL;
+
+	delete myTextureSheet;
+	myTextureSheet = NULL;
 
 	//Destroy window
 	SDL_DestroyWindow(myWindow);
@@ -102,6 +107,9 @@ bool Game::loadMedia()
 	//myTexture = new Texture();
 	//success = myTexture->loadFromFile("res/error.png", myRenderer);
 	myTexture = myTextureLoader->load("res/error.png");
+
+	myTextureSheet = new TextureSheet();
+	myTextureSheet->loadFromFile("res/sprites/terrain/test.png", myRenderer, 32, 32);
 
 	return success;
 }
@@ -205,9 +213,12 @@ void Game::render()
 	SDL_RenderClear(myRenderer);
 
 	//everything
+
+	myTextureSheet->render(128, 128, 1);
+
 	static int angle = 0;
 	angle++;
-	myTexture->render(100, 200, myRenderer, angle);
+	myTexture->render(100, 200, angle);
 
 	//Draw
 	SDL_RenderPresent(myRenderer);

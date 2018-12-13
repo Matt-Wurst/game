@@ -21,6 +21,7 @@ bool Texture::loadFromFile(std::string file, SDL_Renderer * renderer)
 	free();
 	SDL_Texture * newTexture = NULL;
 	SDL_Surface* loadedSurface = IMG_Load(file.c_str()); 
+	myRenderer = renderer;
 	
 	if (loadedSurface == NULL)
 	{
@@ -33,7 +34,18 @@ bool Texture::loadFromFile(std::string file, SDL_Renderer * renderer)
 		}
 		else
 		{
-
+			newTexture = SDL_CreateTextureFromSurface(renderer, loadedSurface);
+			if (newTexture == NULL)
+			{
+				printf("Unable to create texture from %s! SDL Error: %s\n", file.c_str(), SDL_GetError());
+			}
+			else
+			{
+				myWidth = loadedSurface->w;
+				myHeight = loadedSurface->h;
+				myTexture = newTexture;
+			}
+			SDL_FreeSurface(loadedSurface);
 		}
 		return false;
 	}
@@ -56,10 +68,10 @@ bool Texture::loadFromFile(std::string file, SDL_Renderer * renderer)
 }
 
 
-void Texture::render(int x, int y, SDL_Renderer * renderer, double angle, SDL_Point * center, SDL_RendererFlip flip)
+void Texture::render(int x, int y, double angle, SDL_Point * center, SDL_RendererFlip flip)
 {
 	SDL_Rect renderQuad = { x - myWidth/2, y - myHeight / 2, myWidth, myHeight };
-	SDL_RenderCopyEx(renderer, myTexture, NULL, &renderQuad, angle, center, flip);
+	SDL_RenderCopyEx(myRenderer, myTexture, NULL, &renderQuad, angle, center, flip);
 }
 
 

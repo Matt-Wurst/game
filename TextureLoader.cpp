@@ -20,7 +20,7 @@ Texture * TextureLoader::load(std::string file)
 	auto search = myTextureMap.find(file);
 	if (search == myTextureMap.end())
 	{
-		printf("Loading texture %s", file.c_str());
+		printf("TextureLoader: Loading texture %s\n", file.c_str());
 		Texture * newTexture = new Texture();
 		bool success = newTexture->loadFromFile(file, myRenderer);
 		if (!success)printf("Loading image %s failed", file.c_str());

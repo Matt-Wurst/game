@@ -12,7 +12,7 @@ public:
 	Texture();
 	~Texture();
 	bool loadFromFile(std::string file, SDL_Renderer * renderer);
-	void render(int x, int y, SDL_Renderer * renderer, double angle = 0, SDL_Point * center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE);
+	void render(int x, int y, double angle = 0, SDL_Point * center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE);
 	void free();
 
 	int getWidth();
@@ -20,7 +20,7 @@ public:
 
 private:
 	SDL_Texture * myTexture;
-
+	SDL_Renderer * myRenderer;
 	int myWidth;
 	int myHeight;
 };
