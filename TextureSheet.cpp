@@ -28,6 +28,7 @@ bool TextureSheet::loadFromFile(std::string file, SDL_Renderer * renderer, int t
 	myRenderer = renderer;
 	myTextureWidth = textureWidth;
 	myTextureHeight = textureHeight;
+	mySourceFile = file;
 
 	if (loadedSurface == NULL)
 	{
@@ -93,7 +94,8 @@ void TextureSheet::render(int x, int y, int texture)
 {
 	if (texture < -1 || texture >= myTextureCount)
 	{
-		printf("Out of bounds!");
+		printf("Texture out of bounds!\n");
+		printf("Requested TEXTURE#%d from sheet %s\n", texture, mySourceFile.c_str());
 	}
 	else if (texture == -1)
 	{

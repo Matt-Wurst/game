@@ -32,9 +32,6 @@ Game::~Game()
 	delete myTexture;
 	myTexture = NULL;
 
-	delete myTextureSheet;
-	myTextureSheet = NULL;
-
 	//Destroy window
 	SDL_DestroyWindow(myWindow);
 	myWindow = NULL;
@@ -108,9 +105,8 @@ bool Game::loadMedia()
 	//success = myTexture->loadFromFile("res/error.png", myRenderer);
 	myTexture = myTextureLoader->load("res/error.png");
 
-	myTextureSheet = new TextureSheet();
-	myTextureSheet->loadFromFile("res/sprites/terrain/test.png", myRenderer, 32, 32);
-
+	//myLevelMap.loadTestMap(myRenderer);
+	myLevelMap.loadFile("res/levels/test.json", myRenderer);
 	return success;
 }
 
@@ -164,6 +160,7 @@ int Game::run()
 			if (e.type == SDL_QUIT)
 			{
 				quit = true;
+				//system("PAUSE");
 			}
 			else
 			{
@@ -213,12 +210,13 @@ void Game::render()
 	SDL_RenderClear(myRenderer);
 
 	//everything
-
-	myTextureSheet->render(128, 128, 1);
+	myLevelMap.renderFloor(-16, -16);
 
 	static int angle = 0;
 	angle++;
 	myTexture->render(100, 200, angle);
+
+	myLevelMap.renderCeiling(-16, -16);
 
 	//Draw
 	SDL_RenderPresent(myRenderer);

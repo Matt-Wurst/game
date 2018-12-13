@@ -1,0 +1,28 @@
+{
+	"terrain":{
+		"spritesheet":"test.png",
+		"width":5,
+		"height":4,
+		"floorSprites":
+		[  0,  0, 35, 48, 48,
+		   0,  3, 35, 48, 48,
+		   0,  0, 37, 32, 32,
+		   0,  0,  0,  0,  0],
+		"roofSprites":
+		[138,128,128,128,139,
+		 130, -1, -1, -1,131,
+		 130, -1, -1, -1,131,
+		 137,129,129,129,136],
+		"navigable":
+		[0,0,0,0,0,
+		 0,1,1,1,0,
+		 0,1,1,1,0,
+		 0,0,0,0,0]
+	},
+	"player":{
+		"posX":1,
+		"posY":1,
+		"placeholder":"yes this is a placeholder, there's gonna be more someday..."
+	},
+	"enemies":[]
+}

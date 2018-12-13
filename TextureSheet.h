@@ -20,6 +20,7 @@ public:
 	inline int getTextureWidth() { return myTextureWidth; }
 	inline int getTextureHeight() { return myTextureHeight; }
 	inline int getTextureCount() { return myTextureCount; }
+	inline std::string getFile() { return mySourceFile; }
 
 private:
 	void initRectangles();
@@ -34,4 +35,5 @@ private:
 	int myTextureCount;
 	int myTextureCountH;
 	int myTextureCountV;
+	std::string mySourceFile;
 };
