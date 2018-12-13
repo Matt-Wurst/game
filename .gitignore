@@ -2,4 +2,4 @@
 *.vcxproj.filters
 *.vcxproj.user
 Debug/
-RELEASE the kraken/
+Release/
