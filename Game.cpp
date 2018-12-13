@@ -105,6 +105,8 @@ bool Game::loadMedia()
 	//success = myTexture->loadFromFile("res/error.png", myRenderer);
 	myTexture = myTextureLoader->load("res/error.png");
 
+	myPlayer = Player(128, 128, myTexture);
+
 	//myLevelMap.loadTestMap(myRenderer);
 	myLevelMap.loadFile("res/levels/test.json", myRenderer);
 	return success;
@@ -212,9 +214,7 @@ void Game::render()
 	//everything
 	myLevelMap.renderFloor(-16, -16);
 
-	static int angle = 0;
-	angle++;
-	myTexture->render(100, 200, angle);
+	myPlayer.render(-16, -16);
 
 	myLevelMap.renderCeiling(-16, -16);
 
@@ -225,4 +225,14 @@ void Game::render()
 
 void Game::logic()
 {
+	const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
+	int v = 120;
+	int vx = 0;
+	int vy = 0;
+	if (currentKeyStates[SDL_SCANCODE_W]) vy -= v;
+	if (currentKeyStates[SDL_SCANCODE_A]) vx -= v;
+	if (currentKeyStates[SDL_SCANCODE_S]) vy += v;
+	if (currentKeyStates[SDL_SCANCODE_D]) vx += v;
+	myPlayer.setMovement(vx, vy);
+	myPlayer.tick();
 }

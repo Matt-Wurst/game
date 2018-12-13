@@ -8,7 +8,7 @@
 #include "TextureLoader.h"
 #include "TextureSheet.h"
 #include "LevelMap.h"
-
+#include "Player.h"
 
 class Game
 {
@@ -36,5 +36,6 @@ private:
 	//testing thingies
 	Texture * myTexture = NULL;
 	LevelMap myLevelMap;
+	Player myPlayer;
 };
 

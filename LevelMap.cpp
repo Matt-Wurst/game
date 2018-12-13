@@ -102,7 +102,7 @@ bool LevelMap::load(json levelData, SDL_Renderer * renderer)
 	}
 	catch(...)
 	{
-		printf("Error parsing json file");
+		printf("Error parsing json file\n");
 		return false;
 	}
 }
@@ -120,7 +120,7 @@ bool LevelMap::loadFile(std::string levelFile, SDL_Renderer * renderer)
 	}
 	catch (...)
 	{
-		printf("Error parsing json file");
+		printf("Error parsing json file\n");
 		return false;
 	}
 }
