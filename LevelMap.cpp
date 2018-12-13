@@ -80,35 +80,49 @@ bool LevelMap::validateObject(json obj)
 
 bool LevelMap::load(json levelData, SDL_Renderer * renderer)
 {
-	if (!validateObject(levelData)) return false;
-	myRenderer = renderer;
-	myTileWidth = 32;
-	myTileHeight = 32;
-	myTileCountX = levelData["width"];
-	myTileCountY = levelData["height"];
-	myTileCount = myTileCountX*myTileCountY;
-	myLevelWidth = myTileCountX*myTileWidth;
-	myLevelHeight = myTileCountY*myTileHeight;
+	try
+	{
+		if (!validateObject(levelData)) return false;
+		myRenderer = renderer;
+		myTileWidth = 32;
+		myTileHeight = 32;
+		myTileCountX = levelData["width"];
+		myTileCountY = levelData["height"];
+		myTileCount = myTileCountX*myTileCountY;
+		myLevelWidth = myTileCountX*myTileWidth;
+		myLevelHeight = myTileCountY*myTileHeight;
 
-	myFloorMap = levelData["floorSprites"];
-	myCeilingMap = levelData["roofSprites"];
-	myNavMap = levelData["navigable"];
+		myFloorMap = levelData["floorSprites"];
+		myCeilingMap = levelData["roofSprites"];
+		myNavMap = levelData["navigable"];
 
-	std::string spritesheet = levelData["spritesheet"];
-	myTextureSheet.loadFromFile("res/sprites/terrain/" + spritesheet, renderer, 32, 32);
-
-	return true;
+		std::string spritesheet = levelData["spritesheet"];
+		myTextureSheet.loadFromFile("res/sprites/terrain/" + spritesheet, renderer, 32, 32);
+		return true;
+	}
+	catch(...)
+	{
+		printf("Error parsing json file");
+		return false;
+	}
 }
 
 
 bool LevelMap::loadFile(std::string levelFile, SDL_Renderer * renderer)
 {
-	std::ifstream jsonFile;
-	jsonFile.open(levelFile);
-	json levelData;
-	jsonFile >> levelData;
-	jsonFile.close();
-	return load(levelData["terrain"], renderer);
+	try{
+		std::ifstream jsonFile;
+		jsonFile.open(levelFile);
+		json levelData;
+		jsonFile >> levelData;
+		jsonFile.close();
+		return load(levelData["terrain"], renderer);
+	}
+	catch (...)
+	{
+		printf("Error parsing json file");
+		return false;
+	}
 }
 
 
