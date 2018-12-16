@@ -26,10 +26,21 @@ public:
 	void renderCeiling(int cameraOffsetX, int cameraOffsetY);
 
 	inline int getLevelWidth() { return myLevelWidth; };
-	inline int getLevelHeight() { return myLevelHeight; };
+	inline int getLevelHeight() { return myLevelHeight; }
+
+	inline int getTileWidth() { return myTileWidth; };
+	inline int getTileHeight() { return myTileHeight; };
 
 	inline int getPlayerStartX() { return myPlayerStartX; };
 	inline int getPlayerStartY() { return myPlayerStartY; };
+
+	inline int navMapAtPoint(int x, int y) { 
+		if (x < 0)return 0;
+		if (x > myTileCountX)return 0;
+		if (y < 0)return 0;
+		if (y > myTileCountY)return 0;
+		return myNavMap[y * myTileCountX + x]; 
+	}
 
 	bool validateObject(json obj);
 private:

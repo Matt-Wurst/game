@@ -2,12 +2,12 @@
 
 
 
-Player::Player() :PhysicsObject(0, 0, 32, 1, 0)
+Player::Player() :PhysicsObject(0, 0, 12, 1, 0)
 {
 	myTexture = NULL;
 }
 
-Player::Player(int x, int y, Texture * texture):PhysicsObject(x, y, 32, 1, 0)
+Player::Player(int x, int y, Texture * texture):PhysicsObject(x, y, 12, 1, 0)
 {
 	myTexture = texture;
 }

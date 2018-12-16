@@ -109,7 +109,6 @@ bool Game::loadMedia()
 	myLevelMap.loadFile("./res/levels/test.json", myRenderer);
 
 	myPlayer = Player(myLevelMap.getPlayerStartX(), myLevelMap.getPlayerStartY(), myTexture);
-	printf("%d, %d", myLevelMap.getPlayerStartX(), myLevelMap.getPlayerStartY());
 	return success;
 }
 
@@ -249,5 +248,5 @@ void Game::logic()
 	if (currentKeyStates[SDL_SCANCODE_S]) vy += v;
 	if (currentKeyStates[SDL_SCANCODE_D]) vx += v;
 	myPlayer.setMovement(vx, vy);
-	myPlayer.tick();
+	myPlayer.tick(&myLevelMap);
 }

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "LevelMap.h"
 
 class PhysicsObject
 {
@@ -17,6 +18,8 @@ public:
 
 	inline void applyForce(int x, int y) { myVelX += (long long int)x / myMass; myVelY += (long long int)y / myMass; }
 	inline void tick() { myPosX += myVelX / 60; myPosY += myVelY / 60; myAngle += myAngularVelocity / 60; }
+
+	virtual void tick(LevelMap * enviroment);
 
 	inline int getPosX()   { return (int)(myPosX >> 16); }
 	inline int getPosY()   { return (int)(myPosY >> 16); }
@@ -72,4 +75,3 @@ private:
 	int myMass;
 	int myRadius;
 };
-
