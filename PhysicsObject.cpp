@@ -19,39 +19,47 @@ void PhysicsObject::tick(LevelMap * enviroment)
 
 	long long int radiusExact = myRadius << 16;
 
+	long long int topmost    = inTilePosY - radiusExact;
 	long long int bottommost = inTilePosY + radiusExact;
-	long long int leftmost = inTilePosX - radiusExact;
-	long long int rightmost = inTilePosX + radiusExact;
+	long long int leftmost   = inTilePosX - radiusExact;
+	long long int rightmost  = inTilePosX + radiusExact;
 
-	if(enviroment->navMapAtPoint(tilePosX, tilePosY - 1) == 0)
+
+	bool topOverlap = topmost < 0;
+	bool bottomOverlap = bottommost > tileHeight;
+	bool leftOverlap = leftmost < 0;
+	bool rightOverlap = rightmost > tileWidth;
+	
+	bool checkTopLeft     = true;
+	bool checkTopRight    = true;
+	bool checkBottomLeft  = true;
+	bool checkBottomRight = true;
+
+	if(topOverlap)
 	{ 
-		long long int topmost = inTilePosY - radiusExact;
-		if (topmost < 0)
+		if (enviroment->navMapAtPoint(tilePosX, tilePosY - 1) == 0)
 		{
 			myPosY -= topmost;
 		}
 	}
-	if (enviroment->navMapAtPoint(tilePosX, tilePosY + 1) == 0)
+	if (bottomOverlap)
 	{
-		long long int botmost = inTilePosY + radiusExact;
-		if (botmost > tileHeight)
+		if (enviroment->navMapAtPoint(tilePosX, tilePosY + 1) == 0)
 		{
-			myPosY -= botmost;
+			myPosY -= bottommost;
 			myPosY += tileHeight;
 		}
 	}
-	if (enviroment->navMapAtPoint(tilePosX -1, tilePosY) == 0)
+	if (leftOverlap)
 	{
-		long long int leftmost = inTilePosX - radiusExact;
-		if (leftmost < 0)
+		if (enviroment->navMapAtPoint(tilePosX - 1, tilePosY) == 0)
 		{
 			myPosX -= leftmost;
 		}
 	}
-	if (enviroment->navMapAtPoint(tilePosX + 1, tilePosY) == 0)
+	if (rightOverlap)
 	{
-		long long int rightmost = inTilePosX + radiusExact;
-		if (rightmost > tileWidth)
+		if (enviroment->navMapAtPoint(tilePosX + 1, tilePosY) == 0)
 		{
 			myPosX -= rightmost;
 			myPosX += tileWidth;
