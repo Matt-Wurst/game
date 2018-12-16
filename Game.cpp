@@ -150,8 +150,8 @@ int Game::run()
 	//Event handler
 	SDL_Event e;
 
-	int startTime = SDL_GetTicks();
-	int nextTickTime = startTime;
+	unsigned int startTime = SDL_GetTicks();
+	unsigned int nextTickTime = startTime;
 
 	//While application is running
 	while (!quit)

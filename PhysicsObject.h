@@ -6,8 +6,8 @@ class PhysicsObject
 public:
 	PhysicsObject(int x, int y, int radius, int mass, double angle = 0 ) 
 	{
-		myPosX = x << 16; myPosY = y << 16;
-		myVelX = 0; myVelY = 0;
+		myPosX = (long long int)x << 16; (long long int)myPosY = y << 16;
+		myVelX = (long long int)0; myVelY = (long long int)0;
 		myRadius = radius;
 		myMass = mass;
 		myAngle = angle;
@@ -18,19 +18,19 @@ public:
 	inline void applyForce(int x, int y) { myVelX += (long long int)x / myMass; myVelY += (long long int)y / myMass; }
 	inline void tick() { myPosX += myVelX / 60; myPosY += myVelY / 60; myAngle += myAngularVelocity / 60; }
 
-	inline int getPosX()   { return myPosX >> 16; }
-	inline int getPosY()   { return myPosY >> 16; }
-	inline int getVelX()   { return myVelX >> 16; }
-	inline int getVelY()   { return myVelY >> 16; }
+	inline int getPosX()   { return (int)(myPosX >> 16); }
+	inline int getPosY()   { return (int)(myPosY >> 16); }
+	inline int getVelX()   { return (int)(myVelX >> 16); }
+	inline int getVelY()   { return (int)(myVelY >> 16); }
 	inline int getMass()   { return myMass; }
 	inline int getRadius() { return myRadius; }
 	inline double getAngle() { return myAngle; }
 	inline double getAnglularVelocity() { return myAngularVelocity; }
 
-	inline void setPosX(int x)   { myPosX = x << 16; }
-	inline void setPosY(int y)   { myPosY = y << 16; }
-	inline void setVelX(int vx)  { myVelX = vx << 16; }
-	inline void setVelY(int vy)  { myVelY = vy << 16; }
+	inline void setPosX(int x)   { myPosX = (long long int)x << 16; }
+	inline void setPosY(int y)   { myPosY = (long long int)y << 16; }
+	inline void setVelX(int vx)  { myVelX = (long long int)vx << 16; }
+	inline void setVelY(int vy)  { myVelY = (long long int)vy << 16; }
 	inline void setMass(int m)   { myMass = m; }
 	inline void setRadius(int r) { myRadius = r; }
 	inline void setAngle(double a) { myAngle = a; }
@@ -53,10 +53,10 @@ public:
 	static inline bool isColliding(PhysicsObject * a, PhysicsObject * b)
 	{
 		long long int radiusSum = a->getRadius() + b->getRadius();
-		long long int xDiff = a->getPosX(); - b->getPosX();
+		long long int xDiff = a->getPosX() - b->getPosX();
 		if (xDiff < -radiusSum) return false;
 		if (xDiff >  radiusSum) return false;
-		long long int yDiff = a->getPosY(); -b->getPosY();
+		long long int yDiff = a->getPosY() - b->getPosY();
 		if (yDiff < -radiusSum) return false;
 		if (yDiff >  radiusSum) return false;
 		return ((xDiff * xDiff) + (yDiff*yDiff)) < (radiusSum * radiusSum);
