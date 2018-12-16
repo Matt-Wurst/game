@@ -105,10 +105,11 @@ bool Game::loadMedia()
 	//success = myTexture->loadFromFile("res/error.png", myRenderer);
 	myTexture = myTextureLoader->load("./res/error.png");
 
-	myPlayer = Player(128, 128, myTexture);
-
 	//myLevelMap.loadTestMap(myRenderer);
 	myLevelMap.loadFile("./res/levels/test.json", myRenderer);
+
+	myPlayer = Player(myLevelMap.getPlayerStartX(), myLevelMap.getPlayerStartY(), myTexture);
+	printf("%d, %d", myLevelMap.getPlayerStartX(), myLevelMap.getPlayerStartY());
 	return success;
 }
 

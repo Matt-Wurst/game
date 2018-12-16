@@ -38,6 +38,8 @@ bool LevelMap::loadTestMap(SDL_Renderer * renderer)
 	{
 		myNavMap[i] = 1;
 	}
+	myPlayerStartX = 32;
+	myPlayerStartY = 32;
 	return myTextureSheet.loadFromFile("res/sprites/terrain/test.png", renderer, 32, 32);
 }
 
@@ -108,15 +110,39 @@ bool LevelMap::load(json levelData, SDL_Renderer * renderer)
 }
 
 
+
+bool LevelMap::load(json levelData, SDL_Renderer * renderer, int playerStartX, int playerStartY) 
+{
+	bool success = load(levelData, renderer);
+	if (success) {
+		myPlayerStartX = playerStartX * myTileWidth;
+		myPlayerStartY = playerStartY * myTileHeight;
+	}
+	return success;
+}
+
+
 bool LevelMap::loadFile(std::string levelFile, SDL_Renderer * renderer)
 {
-	try{
+	try
+	{
 		std::ifstream jsonFile;
 		jsonFile.open(levelFile);
 		json levelData;
 		jsonFile >> levelData;
 		jsonFile.close();
-		return load(levelData["terrain"], renderer);
+		int x = 0;
+		int y = 0;
+		try
+		{
+			x = levelData["player"]["posX"];
+			y = levelData["player"]["posY"];
+		}
+		catch (...)
+		{
+			printf("Could not find player spawn in file\n");
+		}
+		return load(levelData["terrain"], renderer, x, y);
 	}
 	catch (...)
 	{

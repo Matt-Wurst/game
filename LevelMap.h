@@ -19,6 +19,7 @@ public:
 
 	bool loadTestMap(SDL_Renderer * renderer);
 	bool load(json levelData, SDL_Renderer * renderer);
+	bool load(json levelData, SDL_Renderer * renderer, int playerStartX, int PlayerStartY);
 	bool loadFile(std::string levelFile, SDL_Renderer * renderer);
 
 	void renderFloor(int cameraOffsetX, int cameraOffsetY);
@@ -26,6 +27,9 @@ public:
 
 	inline int getLevelWidth() { return myLevelWidth; };
 	inline int getLevelHeight() { return myLevelHeight; };
+
+	inline int getPlayerStartX() { return myPlayerStartX; };
+	inline int getPlayerStartY() { return myPlayerStartY; };
 
 	bool validateObject(json obj);
 private:
@@ -43,5 +47,7 @@ private:
 	int myTileCount;
 	int myTileCountX;
 	int myTileCountY;
+	int myPlayerStartX;
+	int myPlayerStartY;
 };
 
