@@ -1,6 +1,6 @@
 {
 	"terrain":{
-		"spritesheet":"test.png",
+		"spritesheet":"res/sprites/terrain/test.png",
 		"width":5,
 		"height":4,
 		"floorSprites":
