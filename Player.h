@@ -3,7 +3,7 @@
 #include "PhysicsObject.h"
 #include "Texture.h"
 
-class Player : public PhysicsObject
+class Player : public DrawablePhysicsObject
 {
 public:
 	Player();
@@ -12,9 +12,6 @@ public:
 
 	void setMovement(int x, int y);
 
-	void render(int cameraOffsetX, int cameraOffsetY);
-
 private:
-	Texture * myTexture;
 };
 

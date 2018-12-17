@@ -37,5 +37,6 @@ private:
 	Texture * myTexture = NULL;
 	LevelMap myLevelMap;
 	Player myPlayer;
+	DrawablePhysicsObject myBall;
 };
 

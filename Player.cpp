@@ -2,14 +2,12 @@
 
 
 
-Player::Player() :PhysicsObject(0, 0, 32, 1, 0)
+Player::Player() :DrawablePhysicsObject(0, 0, 32, 1, 0)
 {
-	myTexture = NULL;
 }
 
-Player::Player(int x, int y, Texture * texture):PhysicsObject(x, y, 32, 1, 0)
+Player::Player(int x, int y, Texture * texture): DrawablePhysicsObject(x, y, 32, 1, 0, texture)
 {
-	myTexture = texture;
 }
 
 
@@ -39,11 +37,4 @@ void Player::setMovement(int x, int y)
 		if (y < 0) { setAngle(0); }
 		else if (y > 0) { setAngle(180); }
 	}
-}
-
-
-void Player::render(int cameraOffsetX, int cameraOffsetY)
-{
-	if (myTexture == NULL) return;
-	myTexture->render(getPosX() - cameraOffsetX, getPosY() - cameraOffsetY, getAngle());
 }

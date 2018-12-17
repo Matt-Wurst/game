@@ -1,10 +1,12 @@
 #pragma once
 
 #include "LevelMap.h"
+#include "Texture.h"
 
 class PhysicsObject
 {
 public:
+	PhysicsObject() { myRadius = 16; myMass = 1; };
 	PhysicsObject(int x, int y, int radius, int mass, double angle = 0 ) 
 	{
 		myPosX = (long long int)x << 16; (long long int)myPosY = y << 16;
@@ -74,4 +76,22 @@ private:
 	double myAngularVelocity;
 	int myMass;
 	int myRadius;
+};
+
+
+
+class DrawablePhysicsObject : public PhysicsObject
+{
+public:
+	DrawablePhysicsObject() {};
+	DrawablePhysicsObject(int x, int y, int r, int m, double a = 0, Texture * texture = NULL) :PhysicsObject(x, y, r, m, a) { myTexture = texture; };
+
+	virtual void render(int cameraOffsetX = 0, int cameraOffsetY = 0);
+
+	Texture * getTexture() { return myTexture; }
+
+	void setTexture(Texture * texture) { myTexture = texture; }
+
+private:
+	Texture * myTexture;
 };

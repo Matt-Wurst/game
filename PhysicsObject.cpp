@@ -47,6 +47,7 @@ void PhysicsObject::tick(LevelMap * enviroment)
 		if (enviroment->navMapAtPoint(tilePosX, tilePosY - 1) == 0)
 		{
 			myPosY -= topmost;
+			myVelY = -myVelY;
 			checkTopLeft = false;
 			checkTopRight = false;
 		}
@@ -57,6 +58,7 @@ void PhysicsObject::tick(LevelMap * enviroment)
 		{
 			myPosY -= bottommost;
 			myPosY += tileHeight;
+			myVelY = -myVelY;
 			checkBottomLeft = false;
 			checkBottomRight = false;
 		}
@@ -66,6 +68,7 @@ void PhysicsObject::tick(LevelMap * enviroment)
 		if (enviroment->navMapAtPoint(tilePosX - 1, tilePosY) == 0)
 		{
 			myPosX -= leftmost;
+			myVelX = -myVelX;
 			checkTopLeft = false;
 			checkBottomLeft = false;
 		}
@@ -76,6 +79,7 @@ void PhysicsObject::tick(LevelMap * enviroment)
 		{
 			myPosX -= rightmost;
 			myPosX += tileWidth;
+			myVelX = -myVelX;
 			checkTopRight = false;
 			checkBottomRight = false;
 		}
@@ -180,6 +184,11 @@ void PhysicsObject::tick(LevelMap * enviroment)
 
 
 
+void DrawablePhysicsObject::render(int cameraOffsetX, int cameraOffsetY)
+{
+	if (myTexture == NULL) return;
+	myTexture->render(getPosX() - cameraOffsetX, getPosY() - cameraOffsetY, getAngle());
+}
 
 
 /*

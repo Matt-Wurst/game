@@ -109,6 +109,10 @@ bool Game::loadMedia()
 	myLevelMap.loadFile("./res/levels/test.json", myRenderer);
 
 	myPlayer = Player(myLevelMap.getPlayerStartX(), myLevelMap.getPlayerStartY(), myTexture);
+	myBall = DrawablePhysicsObject(384, 320, 4, 1);
+	myBall.setVelX(180);
+	myBall.setVelY(120);
+	myBall.setTexture(myTextureLoader->load("./res/sprites/ball.png"));
 	return success;
 }
 
@@ -229,8 +233,10 @@ void Game::render()
 	myLevelMap.renderFloor(camOffsetX, camOffsetY);
 
 	myPlayer.render(camOffsetX, camOffsetY);
+	myBall.render(camOffsetX, camOffsetY);
 
 	myLevelMap.renderCeiling(camOffsetX, camOffsetY);
+
 
 	//Draw
 	SDL_RenderPresent(myRenderer);
@@ -249,4 +255,5 @@ void Game::logic()
 	if (currentKeyStates[SDL_SCANCODE_D]) vx += v;
 	myPlayer.setMovement(vx, vy);
 	myPlayer.tick(&myLevelMap);
+	myBall.tick(&myLevelMap);
 }
