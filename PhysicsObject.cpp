@@ -105,6 +105,14 @@ void PhysicsObject::tick(LevelMap * enviroment)
 				long long int factor = (radiusExact * 260) / d;
 				myPosX = cornerX - ((dx * factor) >> 8);
 				myPosY = cornerY - ((dy * factor) >> 8);
+
+				long long int magic = ((myVelX * dx + myVelY * dy) << 8) / ds;
+				long long int collisionParallelVelocityComponentX = (magic * dx) >> 8;
+				long long int collisionParallelVelocityComponentY = (magic * dy) >> 8;
+				long long int collisionOrthogonalVelocityComponentX = myVelX - collisionParallelVelocityComponentX;
+				long long int collisionOrthogonalVelocityComponentY = myVelY - collisionParallelVelocityComponentY;
+				myVelX = collisionOrthogonalVelocityComponentX - collisionParallelVelocityComponentX;
+				myVelY = collisionOrthogonalVelocityComponentY - collisionParallelVelocityComponentY;
 			}
 		}
 	}
@@ -129,6 +137,14 @@ void PhysicsObject::tick(LevelMap * enviroment)
 				long long int factor = (radiusExact * 260) / d;
 				myPosX = cornerX - ((dx * factor) >> 8);
 				myPosY = cornerY - ((dy * factor) >> 8);
+
+				long long int magic = ((myVelX * dx + myVelY * dy) << 8) / ds;
+				long long int collisionParallelVelocityComponentX = (magic * dx) >> 8;
+				long long int collisionParallelVelocityComponentY = (magic * dy) >> 8;
+				long long int collisionOrthogonalVelocityComponentX = myVelX - collisionParallelVelocityComponentX;
+				long long int collisionOrthogonalVelocityComponentY = myVelY - collisionParallelVelocityComponentY;
+				myVelX = collisionOrthogonalVelocityComponentX - collisionParallelVelocityComponentX;
+				myVelY = collisionOrthogonalVelocityComponentY - collisionParallelVelocityComponentY;
 			}
 		}
 	}
@@ -153,8 +169,16 @@ void PhysicsObject::tick(LevelMap * enviroment)
 				long long int factor = (radiusExact * 260) / d;
 				myPosX = cornerX - ((dx * factor) >> 8);
 				myPosY = cornerY - ((dy * factor) >> 8);
+
+				long long int magic = ((myVelX * dx + myVelY * dy) << 8) / ds;
+				long long int collisionParallelVelocityComponentX = (magic * dx) >> 8;
+				long long int collisionParallelVelocityComponentY = (magic * dy) >> 8;
+				long long int collisionOrthogonalVelocityComponentX = myVelX - collisionParallelVelocityComponentX;
+				long long int collisionOrthogonalVelocityComponentY = myVelY - collisionParallelVelocityComponentY;
+				myVelX = collisionOrthogonalVelocityComponentX - collisionParallelVelocityComponentX;
+				myVelY = collisionOrthogonalVelocityComponentY - collisionParallelVelocityComponentY;
 			}
-		}
+		}	
 	}
 
 	if (checkBottomRight)
@@ -177,6 +201,14 @@ void PhysicsObject::tick(LevelMap * enviroment)
 				long long int factor = (radiusExact * 260) / d;
 				myPosX = cornerX - ((dx * factor) >> 8);
 				myPosY = cornerY - ((dy * factor) >> 8);
+
+				long long int magic = ((myVelX * dx + myVelY * dy) << 8) / ds;
+				long long int collisionParallelVelocityComponentX = (magic * dx) >> 8;
+				long long int collisionParallelVelocityComponentY = (magic * dy) >> 8;
+				long long int collisionOrthogonalVelocityComponentX = myVelX - collisionParallelVelocityComponentX;
+				long long int collisionOrthogonalVelocityComponentY = myVelY - collisionParallelVelocityComponentY;
+				myVelX = collisionOrthogonalVelocityComponentX - collisionParallelVelocityComponentX;
+				myVelY = collisionOrthogonalVelocityComponentY - collisionParallelVelocityComponentY;
 			}
 		}
 	}

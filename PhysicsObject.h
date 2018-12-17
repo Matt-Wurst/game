@@ -84,7 +84,8 @@ class DrawablePhysicsObject : public PhysicsObject
 {
 public:
 	DrawablePhysicsObject() {};
-	DrawablePhysicsObject(int x, int y, int r, int m, double a = 0, Texture * texture = NULL) :PhysicsObject(x, y, r, m, a) { myTexture = texture; };
+	DrawablePhysicsObject(int x, int y, int r, int m, double a = 0, Texture * t = NULL):PhysicsObject(x, y, r, m, a) { myTexture = t; }
+	DrawablePhysicsObject(int x, int y, int m, double a = 0, Texture * t = NULL):PhysicsObject(x, y, t->getWidth() / 2, m, a) { myTexture = t; };
 
 	virtual void render(int cameraOffsetX = 0, int cameraOffsetY = 0);
 

@@ -109,10 +109,9 @@ bool Game::loadMedia()
 	myLevelMap.loadFile("./res/levels/test.json", myRenderer);
 
 	myPlayer = Player(myLevelMap.getPlayerStartX(), myLevelMap.getPlayerStartY(), myTexture);
-	myBall = DrawablePhysicsObject(384, 320, 4, 1);
-	myBall.setVelX(180);
+	myBall = DrawablePhysicsObject(512, 384 + 3, 1, 0, myTextureLoader->load("./res/sprites/ball24.png"));
+	myBall.setVelX(-120);
 	myBall.setVelY(120);
-	myBall.setTexture(myTextureLoader->load("./res/sprites/ball.png"));
 	return success;
 }
 
